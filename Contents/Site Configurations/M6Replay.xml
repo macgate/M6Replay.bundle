@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site site="http://www.m6replay.fr/#/*/*/*" plugin="http://l3.player.M6.fr/swf/M6ReplayApplication.swf.*" initialState="playing" version="1.0">
+			
+	<crop x="245" y="210" width="560" height="310" />
+<!-- PLAYING -->
+	<state name="playing">
+		<event>
+			<condition>
+				<command name="pause" />
+			</condition>
+			<action>
+				<click x="271" y="286" />
+				<goto state="paused" />
+			</action>
+		</event>		
+		
+	</state>
+	
+	<!-- PAUSED -->
+	<state name="paused">
+		<event>
+			<condition>
+				<command name="play" />
+			</condition>
+			<action>
+				<click x="267" y="284" />
+				<goto state="playing" />
+			</action>
+		</event>
+	</state>
+	
+	<seekbar type="simple">
+	  <start x="1" y="320" />
+	  <end x="560" y="335" />
+	  <played>
+		<color rgb="463059" />
+		<color rgb="4f4071" />
+		<color rgb="4b3a69" />
+		</played>
+	</seekbar>	
+
+</site>
