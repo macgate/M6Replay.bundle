@@ -98,13 +98,14 @@ def ListEpisodes(sender, idCategorie, nomCategorie):
 		nom = episode.xpath("./nom")[0].text
 		description = episode.xpath("./resume")[0].text
 		image = IMAGES_SERVER + episode.get('big_img_url')
-		url_sem = episode.get('url_sem')
-		video = "http://www.m6replay.fr/#" + url_sem
+		url = episode.xpath("./fichemedia")[0].get('video_url')[:-4]
+		lienValideVideo = "rtmp://m6dev.fcod.llnwd.net:443/a3100/d1/"
 		date_diffusion = datetime.datetime(*(time.strptime(episode.xpath("./diffusion")[0].get('date'), "%Y-%m-%d %H:%M:%S")[0:6])).strftime("%d/%m/%Y à %Hh%M")
 		str_duree = episode.xpath("./fichemedia")[0].get('duree')
 		duree = long(str_duree) / 60
+		dureevideo = long(str_duree)*1000
 		description = description + '\n\nDiffusé le ' + date_diffusion + '\n' + 'Durée : ' + str(duree) + ' mn'
-		dir.Append(WebVideoItem(url = video, title = nom, subtitle = nomCategorie, summary = description, thumb = image))
+		dir.Append(RTMPVideoItem(url = lienValideVideo, clip = url, title = nom, subtitle = nomCategorie, summary = description, duration = dureevideo, thumb = image))
 	return dir
 	
 	
